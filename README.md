@@ -1,7 +1,5 @@
 kampus suena como krampus :D
-.
-.
-.
-.
-.
-1152276 - 1152202 - 1152289 - 1152253
+Sarith Valentina Parada Ramón            - 1152253
+Giovanny Antonio Muñoz Mendez            - 1152276
+Niumar David Silva Blanco                - 1152289
+Cristhian Camilo Bautista Bautista       - 1152202 
