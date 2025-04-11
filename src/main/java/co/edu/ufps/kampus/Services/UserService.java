@@ -1,6 +1,6 @@
 package co.edu.ufps.kampus.Services;
-import co.edu.ufps.backend.model.User;
-import co.edu.ufps.backend.repository.UserRepository;
+import co.edu.ufps.kampus.Entities.User;
+import co.edu.ufps.kampus.Repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
