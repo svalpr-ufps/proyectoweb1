@@ -37,4 +37,8 @@ public class Teacher extends User {
     protected void setSubjects(List<Subject> subjects) {
         this.subjects = subjects;
     }
+
+    public String getFullName() {
+        return this.firstName + " " + this.lastName;
+    }
 }

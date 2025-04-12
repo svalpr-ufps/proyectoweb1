@@ -28,12 +28,12 @@ public class AcademicResource {
 
     private boolean available = true;
 
-    @ManyToMany(mappedBy = "resources")
+    @ManyToMany(mappedBy = "resource")
     private List<Subject> subjects = new ArrayList<>();
 
-    @OneToMany(mappedBy = "resources", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "resource", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Reservation> reservations = new ArrayList<>();
 
-    @OneToMany(mappedBy = "resources", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "resource", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<SubjectResource> subjectAssociations = new ArrayList<>();
 }
