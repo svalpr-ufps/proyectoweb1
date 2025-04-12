@@ -57,5 +57,20 @@ public class TeacherServiceImpl implements TeacherService {
         }
         return teacherRepository.save((Teacher) user);
     }
+
+    @Override
+    public Optional<Object> findByEmail(String email) {
+        return Optional.empty();
+    }
+
+    @Override
+    public User update(UUID id, User userDetails) {
+        return null;
+    }
+
+    @Override
+    public void delete(UUID id) {
+
+    }
     // ... otros métodos
 }

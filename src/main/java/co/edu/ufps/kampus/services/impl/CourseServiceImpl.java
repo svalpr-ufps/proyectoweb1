@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.UUID;
 
 @Service
@@ -55,7 +56,7 @@ public class CourseServiceImpl implements CourseService {
     }
 
     @Override
-    public List<Course> findPrerequisites(UUID courseId) {
+    public Set<Course> findPrerequisites(UUID courseId) {
         return courseRepository.findById(courseId)
                 .map(Course::getPrerequisites)
                 .orElseThrow(() -> new RuntimeException("Course not found"));
