@@ -10,4 +10,5 @@ import java.util.UUID;
 public interface GradeRepository extends JpaRepository<Grade, UUID> {
     List<Grade> findByAcademicRecordId(UUID academicRecordId);
     List<Grade> findByEvaluationId(UUID evaluationId);
+    List<Grade> findByAcademicRecord_Student_Id(UUID studentId);
 }
