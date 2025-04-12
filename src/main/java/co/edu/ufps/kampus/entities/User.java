@@ -20,10 +20,10 @@ public abstract class User {
     private UUID id;
 
     @Column(nullable = false, length = 50)
-    private String firstName;
+    protected String firstName;
 
     @Column(nullable = false, length = 50)
-    private String lastName;
+    protected String lastName;
 
     @Column(unique = true, nullable = false, length = 100)
     private String email;
@@ -50,4 +50,8 @@ public abstract class User {
 
     @UpdateTimestamp
     private LocalDateTime updatedAt;
+
+    public String getFullName() {
+        return this.firstName + " " + this.lastName;
+    }
 }

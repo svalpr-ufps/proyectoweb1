@@ -1,5 +1,7 @@
 package co.edu.ufps.kampus.controllers;
 
+import co.edu.ufps.kampus.dtos.request.StudentRequestDTO;
+import co.edu.ufps.kampus.dtos.response.StudentResponseDTO;
 import co.edu.ufps.kampus.entities.Student;
 import co.edu.ufps.kampus.services.StudentService;
 import lombok.RequiredArgsConstructor;
@@ -7,7 +9,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
-import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/students")
@@ -35,4 +36,20 @@ public class StudentController {
     }
 
     // Puedes agregar endpoints específicos para estudiantes aquí
+    
+    // Endpoint para registrar estudiante
+    @PostMapping
+    public ResponseEntity<StudentResponseDTO> registerStudent(@RequestBody StudentRequestDTO request) {
+        StudentResponseDTO response = studentService.registerStudent(request);
+        return ResponseEntity.ok(response);
+    }
+    // Endpoint para actualizar datos personales de un estudiante
+    @PutMapping("/{studentCode}")
+    public ResponseEntity<StudentResponseDTO> updateStudent(
+            @PathVariable String studentCode,
+            @RequestBody StudentRequestDTO request
+    ) {
+        StudentResponseDTO response = studentService.updateStudent(studentCode, request);
+        return ResponseEntity.ok(response);
+    }
 }

@@ -44,7 +44,6 @@ public class CourseServiceImpl implements CourseService {
                 .map(course -> {
                     course.setName(courseDetails.getName());
                     course.setDescription(courseDetails.getDescription());
-                    // Actualizar otros campos
                     return courseRepository.save(course);
                 })
                 .orElseThrow(() -> new RuntimeException("Course not found"));

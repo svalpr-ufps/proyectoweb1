@@ -10,7 +10,7 @@ public interface UserService {
     Optional<User> findById(UUID id);
     User save(User user);
 
-    Optional<Object> findByEmail(String email);
+    Optional<User> findByEmail(String email);
 
     User update(UUID id, User userDetails);
 

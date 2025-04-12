@@ -23,8 +23,17 @@ public class AcademicResource {
     @Column(length = 100)
     private String title;
 
+    @Column(length = 255)
+    private String url;
+
     private boolean available = true;
+
+    @ManyToMany(mappedBy = "resource")
+    private List<Subject> subjects = new ArrayList<>();
 
     @OneToMany(mappedBy = "resource", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Reservation> reservations = new ArrayList<>();
+
+    @OneToMany(mappedBy = "resource", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<SubjectResource> subjectAssociations = new ArrayList<>();
 }
