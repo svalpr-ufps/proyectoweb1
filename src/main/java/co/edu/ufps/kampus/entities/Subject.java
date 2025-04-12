@@ -25,6 +25,8 @@ public class Subject {
     @Column(length = 50)
     private String schedule;
 
+    private String title;
+
     @Column(length = 20)
     private String classroom;
 

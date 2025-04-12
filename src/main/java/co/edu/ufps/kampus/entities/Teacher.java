@@ -22,4 +22,11 @@ public class Teacher extends User {
 
     @Column(length = 100)
     private String specialization;
+
+    private List<Subject> subjects = new ArrayList<>();
+
+    public void assignSubject(Subject subject) {
+        subjects.add(subject);
+        subject.setTeacher(this);
+    }
 }
