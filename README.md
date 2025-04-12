@@ -16,9 +16,9 @@
 
 **Tareas asignadas:**
 - Mensajería interna básica (estudiante-docente)  
-  - Porcentaje de completación: 0%
+  - Porcentaje de completación: 80%
 - Registro manual de calificaciones  
-  - Porcentaje de completación: 0%
+  - Porcentaje de completación: 70%
 
 ---
 
@@ -26,9 +26,9 @@
 
 **Tareas asignadas:**
 - Registro y actualización de datos personales  
-  - Porcentaje de completación: 0%
+  - Porcentaje de completación: 70%
 - Historial académico (consulta de calificaciones)  
-  - Porcentaje de completación: 0%
+  - Porcentaje de completación: 70%
 
 ---
 
