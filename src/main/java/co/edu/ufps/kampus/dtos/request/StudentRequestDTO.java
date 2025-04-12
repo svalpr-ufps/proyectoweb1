@@ -8,7 +8,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class StudentRequest {
+public class StudentRequestDTO {
 
     // Campos heredados de User
     private String firstName;

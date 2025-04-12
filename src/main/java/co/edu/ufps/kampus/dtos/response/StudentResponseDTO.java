@@ -1,9 +1,14 @@
 package co.edu.ufps.kampus.dtos.response;
 
+import lombok.Getter;
+import lombok.Setter;
+import org.springframework.web.bind.annotation.GetMapping;
+
 import java.time.LocalDate;
 import java.util.UUID;
-
-public class StudentResponse {
+@Getter
+@Setter
+public class StudentResponseDTO {
 
     private UUID id;
 

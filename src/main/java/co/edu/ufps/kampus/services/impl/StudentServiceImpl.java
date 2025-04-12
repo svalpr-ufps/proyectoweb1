@@ -1,7 +1,7 @@
 package co.edu.ufps.kampus.services.impl;
 
-import co.edu.ufps.kampus.dtos.request.StudentRequest;
-import co.edu.ufps.kampus.dtos.response.StudentResponse;
+import co.edu.ufps.kampus.dtos.request.StudentRequestDTO;
+import co.edu.ufps.kampus.dtos.response.StudentResponseDTO;
 import co.edu.ufps.kampus.entities.Role;
 import co.edu.ufps.kampus.entities.Student;
 import co.edu.ufps.kampus.entities.User;
@@ -83,7 +83,7 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-public StudentResponse registerStudent(StudentRequest request) {
+public StudentResponseDTO registerStudent(StudentRequestDTO request) {
     Student student = new Student();
 
     // Datos heredados de User
@@ -108,7 +108,7 @@ public StudentResponse registerStudent(StudentRequest request) {
 }
 
 @Override
-public StudentResponse updateStudent(String studentCode, StudentRequest request) {
+public StudentResponseDTO updateStudent(String studentCode, StudentRequestDTO request) {
     Student student = studentRepository.findByStudentCode(studentCode)
             .orElseThrow(() -> new ResourceNotFoundException("Estudiante no encontrado con código: " + studentCode));
 
@@ -130,8 +130,8 @@ public StudentResponse updateStudent(String studentCode, StudentRequest request)
 
 
     // ... otros métodos heredados
-    private StudentResponse mapToResponse(Student student) {
-        StudentResponse response = new StudentResponse();
+    private StudentResponseDTO mapToResponse(Student student) {
+        StudentResponseDTO response = new StudentResponseDTO();
         response.setId(student.getId());
         response.setFirstName(student.getFirstName());
         response.setLastName(student.getLastName());
