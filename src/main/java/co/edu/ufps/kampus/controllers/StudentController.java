@@ -1,5 +1,7 @@
 package co.edu.ufps.kampus.controllers;
 
+import co.edu.ufps.kampus.dtos.request.StudentRequest;
+import co.edu.ufps.kampus.dtos.response.StudentResponse;
 import co.edu.ufps.kampus.entities.Student;
 import co.edu.ufps.kampus.services.StudentService;
 import lombok.RequiredArgsConstructor;
@@ -35,4 +37,20 @@ public class StudentController {
     }
 
     // Puedes agregar endpoints específicos para estudiantes aquí
+    
+    // Endpoint para registrar estudiante
+    @PostMapping
+    public ResponseEntity<StudentResponse> registerStudent(@RequestBody StudentRequest request) {
+        StudentResponse response = studentService.registerStudent(request);
+        return ResponseEntity.ok(response);
+    }
+    // Endpoint para actualizar datos personales de un estudiante
+    @PutMapping("/{studentCode}")
+    public ResponseEntity<StudentResponse> updateStudent(
+            @PathVariable String studentCode,
+            @RequestBody StudentRequest request
+    ) {
+        StudentResponse response = studentService.updateStudent(studentCode, request);
+        return ResponseEntity.ok(response);
+    }
 }
