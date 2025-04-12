@@ -24,15 +24,18 @@ public class SubjectResponseDTO {
     private List<AcademicResourceSimpleDTO> resources;
 
     public SubjectResponseDTO(UUID id, String name, String code) {
+        this.id = id;
+        this.name = name;
+        this.code = code;
     }
 
-    // DTOs simplificados para relaciones
     @Data
     @Builder
     @NoArgsConstructor
     @AllArgsConstructor
     public static class CourseSimpleDTO {
         private UUID id;
+        private String code;
         private String name;
     }
 
