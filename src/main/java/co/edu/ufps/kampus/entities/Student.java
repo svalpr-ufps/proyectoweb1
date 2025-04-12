@@ -19,11 +19,4 @@ public class Student extends User {
 
     @OneToOne(mappedBy = "student", cascade = CascadeType.ALL, orphanRemoval = true)
     private AcademicRecord academicRecord;
-
-    @OneToMany(mappedBy = "subject", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<SubjectResource> resourceAssociations = new ArrayList<>();
-
-    public String getFullName() {
-        return this.firstName + " " + this.lastName;
-    }
 }

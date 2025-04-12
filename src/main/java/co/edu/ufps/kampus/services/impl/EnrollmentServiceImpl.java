@@ -15,6 +15,8 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class EnrollmentServiceImpl implements EnrollmentService {
 
+    private final StudentRepository studentRepository;
+    private final CourseRepository courseRepository;
     private final EnrollmentRepository enrollmentRepository;
 
     @Override
@@ -54,5 +56,20 @@ public class EnrollmentServiceImpl implements EnrollmentService {
         return List.of();
     }
 
-    // ... otros métodos
+    public void enrollStudentInCourse(UUID studentId, UUID courseId) {
+        Student student = studentRepository.findById(studentId)
+            .orElseThrow(() -> new RuntimeException("Student not found"));
+
+        Course course = courseRepository.findById(courseId)
+            .orElseThrow(() -> new RuntimeException("Course not found"));
+
+        Enrollment enrollment = new Enrollment();
+        enrollment.setId(UUID.randomUUID());
+        enrollment.setStudent(student);
+        enrollment.setCourse(course);
+        enrollment.setEnrollmentDate(LocalDateTime.now());
+        enrollment.setStatus(EnrollmentStatus.ACTIVE);
+
+        enrollmentRepository.save(enrollment);
+    }
 }
