@@ -59,7 +59,7 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public Optional<Object> findByEmail(String email) {
+    public Optional<User> findByEmail(String email) {
         return Optional.empty();
     }
 

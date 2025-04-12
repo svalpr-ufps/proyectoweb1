@@ -51,6 +51,20 @@ public class Subject {
     @JoinTable(
             name = "subject_resources",
             joinColumns = @JoinColumn(name = "subject_id"),
-            inverseJoinColumns = @JoinColumn(name = "resource_id"))
+            inverseJoinColumns = @JoinColumn(name = "resource_id"),
+            foreignKey = @ForeignKey(name = "fk_subject_resource_subject"),
+            inverseForeignKey = @ForeignKey(name = "fk_subject_resource_resource")
+    )
     private List<AcademicResource> resources = new ArrayList<>();
+
+    // Métodos helper para manejar la relación bidireccional
+    public void addResource(AcademicResource resource) {
+        this.resources.add(resource);
+        resource.getSubjects().add(this);
+    }
+
+    public void removeResource(AcademicResource resource) {
+        this.resources.remove(resource);
+        resource.getSubjects().remove(this);
+    }
 }

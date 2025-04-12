@@ -4,6 +4,9 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -22,4 +25,16 @@ public class Teacher extends User {
 
     @Column(length = 100)
     private String specialization;
+
+    @ManyToMany
+    @JoinTable(name = "teacher_subjects")
+    private List<Subject> subjects = new ArrayList<>();
+
+    public List<Subject> getSubjects() {
+        return subjects != null ? List.copyOf(subjects) : List.of();
+    }
+
+    protected void setSubjects(List<Subject> subjects) {
+        this.subjects = subjects;
+    }
 }

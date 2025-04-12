@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import java.time.LocalDate;
-import java.util.UUID;
+import java.util.*;
 
 @Entity
 @Table(name = "students")
@@ -19,4 +19,7 @@ public class Student extends User {
 
     @OneToOne(mappedBy = "student", cascade = CascadeType.ALL, orphanRemoval = true)
     private AcademicRecord academicRecord;
+
+    @OneToMany(mappedBy = "subject", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<SubjectResource> resourceAssociations = new ArrayList<>();
 }
