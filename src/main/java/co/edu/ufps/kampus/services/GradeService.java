@@ -6,7 +6,6 @@ import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import co.edu.ufps.kampus.dtos.request.GradeRequestDTO;
 import co.edu.ufps.kampus.dtos.response.GradeResponseDTO;
 import co.edu.ufps.kampus.entities.Grade;
 import co.edu.ufps.kampus.repositories.GradeRepository;;
