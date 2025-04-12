@@ -1,6 +1,5 @@
 package co.edu.ufps.kampus.controller;
 import co.edu.ufps.kampus.entities.User;
-import co.edu.ufps.kampus.services.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
