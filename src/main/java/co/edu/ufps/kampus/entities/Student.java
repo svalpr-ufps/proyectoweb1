@@ -13,8 +13,8 @@ import java.util.UUID;
 public class Student extends User {
 
     @Column(unique = true, length = 20)
-    private String studentCode;
-
+    private String studentCode
+;
     private LocalDate enrollmentDate;
 
     @OneToOne(mappedBy = "student", cascade = CascadeType.ALL, orphanRemoval = true)
