@@ -25,13 +25,16 @@
 
 - **Tareas asignada:**
     - Registro y actualización de datos personales
-    - - **Porcentaje de completación:** 70%
+    - - **Porcentaje de completación:** 80%
 
     - Historial académico (consulta de calificaciones)
-      - **Porcentaje de completación:** 70%
+      - **Porcentaje de completación:** 80%
      
     - Gestión de asistencia (registro y reportes)
-      - **Porcentaje de completación:** 70%
+      - **Porcentaje de completación:** 80%
+  
+    - Gestión de roles y permisos básicos
+      - **Porcentaje de completación:** 80%      
 ---
 
 ## Sarith Valentina Parada Ramón - 1152253
@@ -41,4 +44,3 @@
     - - **Porcentaje de completación:** 90%
     - Creación y administración de asignaturas
     - - **Porcentaje de completación:** 75%
-
