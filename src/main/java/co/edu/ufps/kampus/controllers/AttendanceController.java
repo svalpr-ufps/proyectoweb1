@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,6 +30,7 @@ public class AttendanceController {
     @Autowired
     private StudentService studentService;
 
+    @PreAuthorize("hasRole('TEACHER')")
     @PostMapping("/register")
     public ResponseEntity<Attendance> registerAttendance(
             @RequestParam UUID studentId,
@@ -39,7 +41,8 @@ public class AttendanceController {
         Attendance attendance = attendanceService.registerAttendance(student, present, observations);
         return ResponseEntity.ok(attendance);
     }
-
+    
+    @PreAuthorize("hasAnyRole('TEACHER', 'ADMIN')")
     @GetMapping("/report")
     public ResponseEntity<List<Attendance>> getReport(
             @RequestParam Long studentId,
