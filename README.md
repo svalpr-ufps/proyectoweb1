@@ -29,7 +29,9 @@
 
     - Historial académico (consulta de calificaciones)
       - **Porcentaje de completación:** 70%
-
+     
+    - Gestión de asistencia (registro y reportes)
+      - **Porcentaje de completación:** 70%
 ---
 
 ## Sarith Valentina Parada Ramón - 1152253
