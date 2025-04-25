@@ -49,4 +49,14 @@ public class Teacher extends User {
         subject.setTeacher(this);
 >>>>>>> d33ba7bdd950ff74c95fb6a1542f3624fbd38871
     }
+
+    public boolean isAvailable(DayOfWeek day, LocalTime startTime, LocalTime endTime) {
+        return subjects.stream()
+            .flatMap(subject -> subject.getSchedules().stream())
+            .noneMatch(schedule -> 
+                schedule.getDay() == day &&
+                schedule.getStartTime().isBefore(endTime) &&
+                schedule.getEndTime().isAfter(startTime)
+            );
+    }
 }

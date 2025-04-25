@@ -22,13 +22,7 @@ public class Subject {
     @Column(nullable = false, length = 100)
     private String name;
 
-    @Column(length = 50)
-    private String schedule;
-
     private String title;
-
-    @Column(length = 20)
-    private String classroom;
 
     private Integer capacity;
 
@@ -59,6 +53,9 @@ public class Subject {
     )
     private List<AcademicResource> resources = new ArrayList<>();
 
+    @OneToMany(mappedBy = "subject", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Schedule> schedules = new ArrayList<>();
+
     // Métodos helper para manejar la relación bidireccional
     public void addResource(AcademicResource resource) {
         this.resources.add(resource);
@@ -68,5 +65,15 @@ public class Subject {
     public void removeResource(AcademicResource resource) {
         this.resources.remove(resource);
         resource.getSubjects().remove(this);
+    }
+
+    public void addSchedule(Schedule schedule) {
+        this.schedules.add(schedule);
+        schedule.setSubject(this);
+    }
+
+    public void removeSchedule(Schedule schedule) {
+        this.schedules.remove(schedule);
+        schedule.setSubject(null);
     }
 }

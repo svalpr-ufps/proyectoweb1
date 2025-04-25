@@ -28,4 +28,7 @@ public interface SubjectRepository extends JpaRepository<Subject, UUID> {
 
     @Query("SELECT s FROM Subject s JOIN s.resources r WHERE r.id = :resourceId")
     List<Subject> findByResourceId(@Param("resourceId") UUID resourceId);
+
+    @EntityGraph(attributePaths = {"teacher", "course"})
+    List<Subject> findByTeacherIdAndCourseId(UUID teacherId, UUID courseId);
 }

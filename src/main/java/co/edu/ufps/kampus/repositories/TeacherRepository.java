@@ -18,4 +18,7 @@ public interface TeacherRepository extends JpaRepository<Teacher, UUID> {
     List<Teacher> findBySpecialization(String specialization);
 
     Stream findByEmail(String email);
+
+    @Query("SELECT t FROM Teacher t LEFT JOIN FETCH t.subjects WHERE t.id = :id")
+    Optional<Teacher> findWithSubjectsById(@Param("id") UUID id);
 }
