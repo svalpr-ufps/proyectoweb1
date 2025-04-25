@@ -31,6 +31,7 @@ public class Subject {
     private String classroom;
 
     private Integer capacity;
+    private Integer credits;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "course_id", nullable = false)
@@ -69,4 +70,6 @@ public class Subject {
         this.resources.remove(resource);
         resource.getSubjects().remove(this);
     }
+
+
 }

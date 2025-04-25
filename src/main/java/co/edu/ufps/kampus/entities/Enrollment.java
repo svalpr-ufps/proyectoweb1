@@ -6,7 +6,7 @@ import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import java.time.LocalDateTime;
 import java.util.UUID;
-
+import co.edu.ufps.kampus.entities.Grade;
 @Entity
 @Table(name = "enrollments")
 @Getter @Setter
@@ -35,4 +35,7 @@ public class Enrollment {
     @ManyToOne
     @JoinColumn(name = "course_id")
     private Course course;
+    private Grade grade;
+
+
 }

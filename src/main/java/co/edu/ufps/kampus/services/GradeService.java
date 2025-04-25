@@ -1,30 +1,35 @@
 package co.edu.ufps.kampus.services;
 
-import java.util.List;
-import java.util.UUID;
-
-import org.springframework.beans.factory.annotation.Autowired;
+import co.edu.ufps.kampus.dtos.request.GradeRequestDTO;
+import co.edu.ufps.kampus.entities.Grade;
+import co.edu.ufps.kampus.repositories.GradeRepository;
 import org.springframework.stereotype.Service;
 
-import co.edu.ufps.kampus.dtos.response.GradeResponseDTO;
-import co.edu.ufps.kampus.entities.Grade;
-import co.edu.ufps.kampus.repositories.GradeRepository;;
+import java.util.List;
+import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 public class GradeService {
 
-    @Autowired
-    private GradeRepository gradeRepository;
+    private final GradeRepository gradeRepository;
+
+    public GradeService(GradeRepository gradeRepository) {
+        this.gradeRepository = gradeRepository;
+    }
 
     public List<GradeRequestDTO> getGradesByStudentId(UUID studentId) {
-        List<Grade> grades = gradeRepository.findByAcademicRecord_Student_Id(studentId);
-        return grades.stream().map(grade -> {
-            GradeRequestDTO dto = new GradeRequestDTO();
-            dto.setCourseCode(grade.getCourse().getCode());
-            dto.setCourseName(grade.getCourse().getName());
-            dto.setPeriod(grade.getPeriod());
-            dto.setValue(grade.getValue());
-            return dto;
-        }).toList();
+        return gradeRepository.findByAcademicRecord_Student_Id(studentId)
+                .stream()
+                .map(this::convertToDTO)
+                .collect(Collectors.toList());
+    }
+
+    private GradeRequestDTO convertToDTO(Grade grade) {
+        return GradeRequestDTO.builder()
+                .courseCode(grade.getCourse().getCode())
+                .period(grade.getPeriod())
+                .value(grade.getValue())
+                .build();
     }
 }

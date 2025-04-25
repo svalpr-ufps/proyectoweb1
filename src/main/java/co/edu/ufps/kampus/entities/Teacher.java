@@ -1,5 +1,5 @@
 package co.edu.ufps.kampus.entities;
-
+import co.edu.ufps.kampus.entities.Subject;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -26,7 +26,6 @@ public class Teacher extends User {
     @Column(length = 100)
     private String specialization;
 
-<<<<<<< HEAD
     @ManyToMany
     @JoinTable(name = "teacher_subjects")
     private List<Subject> subjects = new ArrayList<>();
@@ -41,12 +40,12 @@ public class Teacher extends User {
 
     public String getFullName() {
         return this.firstName + " " + this.lastName;
-=======
-    private List<Subject> subjects = new ArrayList<>();
 
-    public void assignSubject(Subject subject) {
+    }
+
+    public void assignSubject(Subject subject){
+        List<Subject> subjects = new ArrayList<>();
         subjects.add(subject);
         subject.setTeacher(this);
->>>>>>> d33ba7bdd950ff74c95fb6a1542f3624fbd38871
     }
 }
