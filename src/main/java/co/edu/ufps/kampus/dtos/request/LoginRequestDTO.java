@@ -15,4 +15,5 @@ public class LoginRequestDTO {
     
     @NotBlank(message = "La contraseña es obligatoria")
     private String password;
+
 }
