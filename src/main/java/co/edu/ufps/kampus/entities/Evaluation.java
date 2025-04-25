@@ -1,6 +1,7 @@
 package co.edu.ufps.kampus.entities;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.Setter;
 import java.time.LocalDate;
@@ -21,6 +22,9 @@ public class Evaluation {
     private String type;
 
     private LocalDate date;
+
+    @NotBlank
+    private String period;
 
     private Double weight;
 

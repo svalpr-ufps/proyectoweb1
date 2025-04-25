@@ -24,10 +24,15 @@ public class Reservation {
     private User user;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "academic_resource_id", nullable = false)
-    private AcademicResource resource;
+    @JoinColumn(name = "room_id", nullable = false)
+    private Room room;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "subject_id")
     private Subject subject;
+
+    public void setPurpose(String purpose) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'setPurpose'");
+    }
 }

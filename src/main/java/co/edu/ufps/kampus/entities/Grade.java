@@ -24,6 +24,10 @@ public class Grade {
 
     private LocalDate evaluationDate;
 
+    @NotBlank
+    private String period;
+    
+
     @Column(columnDefinition = "TEXT")
     private String comments;
 
