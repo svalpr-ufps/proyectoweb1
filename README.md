@@ -18,6 +18,11 @@
       - - **Porcentaje de completación:** 70%
       - Registro manual de calificaciones
       - **Porcentaje de completación:** 70%
+      - Reserva aulas y laboratorios
+      - - **Porcentaje de completación:** 80%
+        - - Generación de reportes de rendimiento (PDF)
+      - **Porcentaje de completación:** 80%
+
 
 ---
 
