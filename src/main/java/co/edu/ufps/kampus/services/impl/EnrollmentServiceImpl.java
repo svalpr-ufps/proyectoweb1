@@ -1,12 +1,18 @@
 package co.edu.ufps.kampus.services.impl;
 
+import co.edu.ufps.kampus.entities.Course;
 import co.edu.ufps.kampus.entities.Enrollment;
 import co.edu.ufps.kampus.entities.EnrollmentStatus;
+import co.edu.ufps.kampus.entities.Student;
+import co.edu.ufps.kampus.repositories.CourseRepository;
 import co.edu.ufps.kampus.repositories.EnrollmentRepository;
+import co.edu.ufps.kampus.repositories.StudentRepository;
 import co.edu.ufps.kampus.services.EnrollmentService;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
