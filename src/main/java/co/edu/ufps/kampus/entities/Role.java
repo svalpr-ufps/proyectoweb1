@@ -19,6 +19,9 @@ public class Role {
     @Column(unique = true, nullable = false, length = 30)
     private String name;
 
+    @Column
+    private String description;
+
     @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(
             name = "role_permissions",
