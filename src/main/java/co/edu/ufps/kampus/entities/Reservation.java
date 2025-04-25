@@ -24,7 +24,7 @@ public class Reservation {
     private User user;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "resource_id", nullable = false)
+    @JoinColumn(name = "academic_resource_id", nullable = false)
     private AcademicResource resource;
 
     @ManyToOne(fetch = FetchType.LAZY)

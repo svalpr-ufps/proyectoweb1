@@ -3,7 +3,6 @@ package co.edu.ufps.kampus.services.impl;
 import co.edu.ufps.kampus.entities.User;
 import co.edu.ufps.kampus.repositories.UserRepository;
 import co.edu.ufps.kampus.services.UserService;
-import co.edu.ufps.kampus.repositories.UserRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Primary;
@@ -35,7 +34,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Optional<Object> findByEmail(String email) {
+    public Optional<User> findByEmail(String email) {
         return Optional.empty();
     }
 
@@ -48,5 +47,4 @@ public class UserServiceImpl implements UserService {
     public void delete(UUID id) {
 
     }
-    // ... otros métodos
 }

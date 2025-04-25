@@ -1,11 +1,18 @@
 package co.edu.ufps.kampus.services.impl;
 
+import co.edu.ufps.kampus.dtos.request.StudentRequestDTO;
+import co.edu.ufps.kampus.dtos.response.StudentResponseDTO;
+import co.edu.ufps.kampus.entities.Role;
 import co.edu.ufps.kampus.entities.Student;
 import co.edu.ufps.kampus.entities.User;
+import co.edu.ufps.kampus.exceptions.ResourceNotFoundException;
+import co.edu.ufps.kampus.repositories.RoleRepository;
 import co.edu.ufps.kampus.repositories.StudentRepository;
 import co.edu.ufps.kampus.services.StudentService;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
@@ -18,6 +25,8 @@ import java.util.stream.Collectors;
 public class StudentServiceImpl implements StudentService {
 
     private final StudentRepository studentRepository;
+    private final RoleRepository roleRepository;
+    private final PasswordEncoder passwordEncoder;
 
     // Métodos específicos de Student
     @Override
@@ -59,7 +68,7 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public Optional<Object> findByEmail(String email) {
+    public Optional<User> findByEmail(String email) {
         return Optional.empty();
     }
 
@@ -73,5 +82,67 @@ public class StudentServiceImpl implements StudentService {
 
     }
 
+    @Override
+public StudentResponseDTO registerStudent(StudentRequestDTO request) {
+    Student student = new Student();
+
+    // Datos heredados de User
+    student.setFirstName(request.getFirstName());
+    student.setLastName(request.getLastName());
+    student.setEmail(request.getEmail());
+    student.setPhone(request.getPhone());
+    student.setBirthDate(request.getBirthDate());
+    student.setPasswordHash(passwordEncoder.encode(request.getPassword()));
+
+    // Rol
+    Role role = roleRepository.findById(request.getRoleId())
+            .orElseThrow(() -> new ResourceNotFoundException("Rol no encontrado"));
+    student.setRole(role);
+
+    // Datos específicos de Student
+    student.setStudentCode(request.getStudentCode());
+    student.setEnrollmentDate(request.getEnrollmentDate());
+
+    student = studentRepository.save(student);
+    return mapToResponse(student);
+}
+
+@Override
+public StudentResponseDTO updateStudent(String studentCode, StudentRequestDTO request) {
+    Student student = studentRepository.findByStudentCode(studentCode)
+            .orElseThrow(() -> new ResourceNotFoundException("Estudiante no encontrado con código: " + studentCode));
+
+    student.setFirstName(request.getFirstName());
+    student.setLastName(request.getLastName());
+    student.setEmail(request.getEmail());
+    student.setPhone(request.getPhone());
+    student.setBirthDate(request.getBirthDate());
+
+    if (request.getPassword() != null && !request.getPassword().isBlank()) {
+        student.setPasswordHash(passwordEncoder.encode(request.getPassword()));
+    }
+
+    student.setEnrollmentDate(request.getEnrollmentDate());
+
+    student = studentRepository.save(student);
+    return mapToResponse(student);
+}
+
+
     // ... otros métodos heredados
+    private StudentResponseDTO mapToResponse(Student student) {
+        StudentResponseDTO response = new StudentResponseDTO();
+        response.setId(student.getId());
+        response.setFirstName(student.getFirstName());
+        response.setLastName(student.getLastName());
+        response.setEmail(student.getEmail());
+        response.setPhone(student.getPhone());
+        response.setBirthDate(student.getBirthDate());
+        response.setStatus(student.getStatus().name());
+        response.setStudentCode(student.getStudentCode());
+        response.setEnrollmentDate(student.getEnrollmentDate());
+        response.setRoleName(student.getRole().getName());
+        return response;
+    }
+    
 }

@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import java.time.LocalDate;
-import java.util.UUID;
+import java.util.*;
 
 @Entity
 @Table(name = "students")
@@ -19,15 +19,4 @@ public class Student extends User {
 
     @OneToOne(mappedBy = "student", cascade = CascadeType.ALL, orphanRemoval = true)
     private AcademicRecord academicRecord;
-
-    @OneToMany(mappedBy = "student", cascade = CascadeType.ALL)
-    private List<Enrollment> enrollments = new ArrayList<>();
-
-    public void enrollInCourse(Course course) {
-        Enrollment enrollment = new Enrollment();
-        enrollment.setStudent(this);
-        enrollment.setCourse(course);
-        enrollment.setEnrollmentDate(LocalDateTime.now());
-        enrollments.add(enrollment);
-    }
 }
