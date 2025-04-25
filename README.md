@@ -43,4 +43,8 @@
     - Registro y actualización de datos profesionales (Docente)
     - - **Porcentaje de completación:** 90%
     - Creación y administración de asignaturas
-    - - **Porcentaje de completación:** 75%
+    - - **Porcentaje de completación:** 80%
+    - Calculo Automático de promedios
+    - - **Porcentaje de completación:** 90%
+    - Autenticación de usuarios (login basico)
+    - - **Porcentaje de completación:** 80%
