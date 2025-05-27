@@ -4,14 +4,18 @@
 ## Giovanny Antonio Muñoz Méndez - 1152276
 
 - **Tareas asignada:**
-    - Mensajería interna básica (estudiante-docente)
+- Mensajería interna básica (estudiante-docente)
       - - **Porcentaje de completación:** 70%
-      - Registro manual de calificaciones
+  - Registro manual de calificaciones
       - **Porcentaje de completación:** 70%
-    - Matrícula e inscripción a cursos
+- Matrícula e inscripción a cursos
       - - **Porcentaje de completación:** 60%
-      - Asignación de cursos a docentes
+  - Asignación de cursos a docentes
       - **Porcentaje de completación:** 60%
+  - Reserva aulas y laboratorios
+      - - **Porcentaje de completación:** 80%
+- Generación de reportes de rendimiento (PDF)
+      - **Porcentaje de completación:** 80%
 
 ---
 
