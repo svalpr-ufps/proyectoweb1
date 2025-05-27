@@ -1,31 +1,23 @@
 # Primera entrega Proyecto Sistema Académico - Kampus
 ---
 
-## Cristhian Camilo Bautista Bautista - 1152202
-
-- **Tareas asignada:**
-    - Matrícula e inscripción a cursos
-    - - **Porcentaje de completación:** 60%
-    - Asignación de cursos a docentes
-      - **Porcentaje de completación:** 60%
-
----
-
 ## Giovanny Antonio Muñoz Méndez - 1152276
 
 - **Tareas asignada:**
-    - Mensajería interna básica (estudiante-docente)
+- Mensajería interna básica (estudiante-docente)
       - - **Porcentaje de completación:** 70%
-      - Registro manual de calificaciones
+  - Registro manual de calificaciones
       - **Porcentaje de completación:** 70%
-      - Reserva aulas y laboratorios
+- Matrícula e inscripción a cursos
+      - - **Porcentaje de completación:** 60%
+  - Asignación de cursos a docentes
+      - **Porcentaje de completación:** 60%
+  - Reserva aulas y laboratorios
       - - **Porcentaje de completación:** 80%
-        - - Generación de reportes de rendimiento (PDF)
+- Generación de reportes de rendimiento (PDF)
       - **Porcentaje de completación:** 80%
 
-
 ---
-
 ## Niumar David Silva Blanco - 1152289
 
 - **Tareas asignada:**
