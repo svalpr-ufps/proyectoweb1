@@ -16,8 +16,8 @@ public class Reservation {
     private UUID id;
 
     private LocalDateTime startDate;
-
     private LocalDateTime endDate;
+    private String purpose;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
@@ -35,4 +35,5 @@ public class Reservation {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'setPurpose'");
     }
+
 }
