@@ -1,4 +1,4 @@
-# Primera entrega Proyecto Sistema Académico - Kampus
+Proyecto Sistema Académico - Kampus
 ---
 
 ## Giovanny Antonio Muñoz Méndez - 1152276
