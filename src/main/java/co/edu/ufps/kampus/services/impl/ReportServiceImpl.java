@@ -26,7 +26,7 @@ public class ReportServiceImpl implements ReportService {
     @Override
     public byte[] generatePerformanceReport(UUID studentId, LocalDate startDate, LocalDate endDate) throws IOException {
         // 1. Obtener datos del estudiante y sus calificaciones
-        List<Grade> grades = ((Object) gradeRepository).findByAcademicRecord_Student_IdAndEvaluation_DateBetween(
+        List<Grade> grades = (gradeRepository).findByAcademicRecord_Student_IdAndEvaluation_DateBetween(
             studentId, startDate, endDate
         );
 

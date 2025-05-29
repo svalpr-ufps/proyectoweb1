@@ -7,6 +7,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.UUID;
+
 @Data
 @NoArgsConstructor
 @Builder
@@ -14,12 +16,11 @@ import lombok.Setter;
 @Getter
 @Setter
 public class GradeResponseDTO {
-    private String courseCode;
-    private String courseName;
+    private UUID id;
+    private String studentCode;
+    private String subjectCode;
+    private String subjectName;
     private String period;
     private Double value;
-    public static Object builder() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'builder'");
-    }
+    private String status;
 }
