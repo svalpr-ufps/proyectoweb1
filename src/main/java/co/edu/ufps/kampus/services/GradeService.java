@@ -3,6 +3,7 @@ package co.edu.ufps.kampus.services;
 import java.util.List;
 import java.util.UUID;
 
+import co.edu.ufps.kampus.dtos.request.GradeRequestDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
