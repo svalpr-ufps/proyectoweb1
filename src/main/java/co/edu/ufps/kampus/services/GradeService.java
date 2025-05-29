@@ -32,21 +32,25 @@ public class GradeService {
     private AcademicRecordRepository academicRecordRepository;
     @Autowired
     private SubjectRepository subjectRepository;
-     
 
-    public List<GradeRequestDTO> getGradesByStudentId(UUID studentId) {
+
+    public List<GradeResponseDTO> getGradesByStudentId(UUID studentId) {
         List<Grade> grades = gradeRepository.findByAcademicRecord_Student_Id(studentId);
-        return grades.stream().map(grade -> {
-            GradeRequestDTO dto = new GradeRequestDTO();
-            dto.setCourseCode(grade.getCourse().getCode());
-            dto.setCourseName(((Subject) grade.getCourse()).getName());
-            dto.setPeriod(grade.getPeriod());
-            dto.setValue(grade.getValue());
-            return dto;
-        }).toList();
+
+        return grades.stream().map(grade -> GradeResponseDTO.builder()
+                .id(grade.getId())
+                .studentCode(grade.getAcademicRecord().getStudent().getStudentCode())
+                .subjectCode(grade.getEvaluation().getSubject().getCode())
+                .subjectName(grade.getEvaluation().getSubject().getName())
+                .period(grade.getPeriod())
+                .value(grade.getScore())
+                .status(grade.getScore() >= 3.0 ? "APROBADO" : "REPROBADO")
+                .build()
+        ).toList();
     }
 
-     public GradeResponseDTO registerGrade(GradeRequestDTO request) {
+
+    public GradeResponseDTO registerGrade(GradeRequestDTO request) {
         // Validaciones
         if (request.getValue() == null || request.getValue() < 0.0 || request.getValue() > 5.0) {
             throw new IllegalArgumentException("La nota debe estar entre 0.0 y 5.0");
