@@ -11,11 +11,9 @@ import co.edu.ufps.kampus.repositories.TeacherRepository;
 import co.edu.ufps.kampus.services.TeacherService;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
-import org.apache.el.stream.Stream;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;

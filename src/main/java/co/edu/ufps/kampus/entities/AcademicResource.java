@@ -7,13 +7,18 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+import org.hibernate.annotations.GenericGenerator;
+
 @Entity
 @Table(name = "academic_resources")
-@Getter @Setter
+@Getter
+@Setter
 public class AcademicResource {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
+    @GeneratedValue(generator = "UUID")
+    @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
+    @Column(name = "id", updatable = false, nullable = false)
     private UUID id;
 
     @Enumerated(EnumType.STRING)
@@ -28,7 +33,11 @@ public class AcademicResource {
 
     private boolean available = true;
 
-    @ManyToMany(mappedBy = "resource")
+    @ManyToMany
+    @JoinTable(name = "room_resources", joinColumns = @JoinColumn(name = "resource_id"), inverseJoinColumns = @JoinColumn(name = "room_id"))
+    private List<Room> rooms = new ArrayList<>();
+
+    @ManyToMany(mappedBy = "resources")
     private List<Subject> subjects = new ArrayList<>();
 
     @OneToMany(mappedBy = "resource", cascade = CascadeType.ALL, orphanRemoval = true)

@@ -4,12 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+import org.hibernate.annotations.GenericGenerator;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
@@ -23,7 +24,9 @@ import lombok.Setter;
 public class Room {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
+    @GeneratedValue(generator = "UUID")
+    @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
+    @Column(name = "id", updatable = false, nullable = false)
     private UUID id;
 
     @Column(unique = true, nullable = false, length = 20)
@@ -40,7 +43,6 @@ public class Room {
     @Enumerated(EnumType.STRING)
     private RoomStatus status; // Enum: AVAILABLE, UNDER_MAINTENANCE, RESERVED
 
-    // Relación opcional con recursos académicos (si necesitas más detalles)
     @ManyToMany(mappedBy = "rooms")
     private List<AcademicResource> resources = new ArrayList<>();
 }

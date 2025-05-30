@@ -8,25 +8,32 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.tools.Diagnostic;
+
+import org.hibernate.annotations.GenericGenerator;
+
 import java.time.LocalDate;
 import java.util.UUID;
 
 @Entity
 @Table(name = "grades")
-@Getter @Setter
+@Getter
+@Setter
 public class Grade {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
+    @GeneratedValue
+    @GenericGenerator(name = "uuid", strategy = "uuid2")
+    @Column(columnDefinition = "uuid", updatable = false, nullable = false)
     private UUID id;
 
+    @DecimalMin(value = "0.0", message = "Grade value must be at least 0.0")
+    @DecimalMax(value = "5.0", message = "Grade value cannot exceed 5.0")
     private Double score;
 
     private LocalDate evaluationDate;
 
-    @NotBlank
+    @NotBlank(message = "Period is required")
     private String period;
-    
 
     @Column(columnDefinition = "TEXT")
     private String comments;
@@ -39,15 +46,8 @@ public class Grade {
     @JoinColumn(name = "evaluation_id", nullable = false)
     private Evaluation evaluation;
 
+    @Transient
     public Diagnostic<Object> getCourse() {
-        return null;
-    }
-
-    public @NotBlank(message = "Period is required") String getPeriod() {
-    return null;
-    }
-
-    public @DecimalMin(value = "0.0", message = "Grade value must be at least 0.0") @DecimalMax(value = "5.0", message = "Grade value cannot exceed 5.0") Double getValue() {
         return null;
     }
 }

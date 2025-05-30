@@ -1,7 +1,6 @@
 package co.edu.ufps.kampus.services.impl;
 
 import co.edu.ufps.kampus.entities.Enrollment;
-import co.edu.ufps.kampus.entities.Grade;
 import co.edu.ufps.kampus.entities.Student;
 import co.edu.ufps.kampus.repositories.EnrollmentRepository;
 import co.edu.ufps.kampus.services.GPACalculatorService;

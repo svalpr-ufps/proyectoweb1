@@ -6,13 +6,18 @@ import lombok.Setter;
 
 import java.util.*;
 
+import org.hibernate.annotations.GenericGenerator;
+
 @Entity
 @Table(name = "courses")
-@Getter @Setter
+@Getter
+@Setter
 public class Course {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
+    @GeneratedValue(generator = "UUID")
+    @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
+    @Column(name = "id", updatable = false, nullable = false)
     private UUID id;
 
     @Column(unique = true, nullable = false, length = 20)
@@ -29,10 +34,7 @@ public class Course {
     private Integer weeklyHours;
 
     @ManyToMany
-    @JoinTable(
-            name = "course_prerequisites",
-            joinColumns = @JoinColumn(name = "course_id"),
-            inverseJoinColumns = @JoinColumn(name = "prerequisite_id"))
+    @JoinTable(name = "course_prerequisites", joinColumns = @JoinColumn(name = "course_id"), inverseJoinColumns = @JoinColumn(name = "prerequisite_id"))
     private Set<Course> prerequisites = new HashSet<>();
 
     @OneToMany(mappedBy = "course", cascade = CascadeType.ALL, orphanRemoval = true)

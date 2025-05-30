@@ -1,10 +1,11 @@
-package co.edu.ufps.kampus.services;
+package co.edu.ufps.kampus.services.impl;
+
+import org.springframework.stereotype.Service;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Service;
 import co.edu.ufps.kampus.entities.User;
 import javax.crypto.SecretKey;
 import java.nio.charset.StandardCharsets;
@@ -13,7 +14,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Service
-public class JwtService {
+public class JwtServiceImpl {
     @Value("${jwt.secret}")
     private String secretKey;
     

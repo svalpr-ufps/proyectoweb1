@@ -7,13 +7,18 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+import org.hibernate.annotations.GenericGenerator;
+
 @Entity
 @Table(name = "subjects")
-@Getter @Setter
+@Getter
+@Setter
 public class Subject {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
+    @GeneratedValue(generator = "UUID")
+    @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
+    @Column(name = "id", updatable = false, nullable = false)
     private UUID id;
 
     @Column(unique = true, nullable = false, length = 20)
@@ -51,13 +56,7 @@ public class Subject {
     private List<Attendance> attendances = new ArrayList<>();
 
     @ManyToMany
-    @JoinTable(
-            name = "subject_resources",
-            joinColumns = @JoinColumn(name = "subject_id"),
-            inverseJoinColumns = @JoinColumn(name = "resource_id"),
-            foreignKey = @ForeignKey(name = "fk_subject_resource_subject"),
-            inverseForeignKey = @ForeignKey(name = "fk_subject_resource_resource")
-    )
+    @JoinTable(name = "subject_academic_resource", joinColumns = @JoinColumn(name = "subject_id"), inverseJoinColumns = @JoinColumn(name = "resource_id"))
     private List<AcademicResource> resources = new ArrayList<>();
 
     // Métodos helper para manejar la relación bidireccional
@@ -70,6 +69,5 @@ public class Subject {
         this.resources.remove(resource);
         resource.getSubjects().remove(this);
     }
-
 
 }

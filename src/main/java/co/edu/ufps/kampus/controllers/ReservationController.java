@@ -1,7 +1,6 @@
 package co.edu.ufps.kampus.controllers;
 
 import java.time.LocalDateTime;
-import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import co.edu.ufps.kampus.dtos.request.ReservationRequestDTO;
 import co.edu.ufps.kampus.dtos.response.ReservationResponseDTO;
-import co.edu.ufps.kampus.entities.Room;
 import co.edu.ufps.kampus.entities.RoomType;
 import co.edu.ufps.kampus.services.ReservationService;
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
@@ -25,13 +23,17 @@ import jakarta.validation.Valid;
 @RequestMapping("/api/reservations")
 public class ReservationController {
 
+    private final ReservationService reservationService;
+
     @Autowired
-    private ReservationService reservationService;
+    public ReservationController(ReservationService reservationService) {
+        this.reservationService = reservationService;
+    }
 
     @PostMapping
     public ResponseEntity<ReservationResponseDTO> createReservation(
         @Valid @RequestBody ReservationRequestDTO request,
-        @RequestHeader("X-User-Id") UUID userId // Asume que el ID viene en headers
+        @RequestHeader("X-User-Id") UUID userId
     ) {
         return ResponseEntity.ok(reservationService.createReservation(request, userId));
     }
@@ -42,7 +44,6 @@ public class ReservationController {
         @RequestParam LocalDateTime endDate,
         @RequestParam(required = false) RoomType type
     ) {
-        // Lógica para listar aulas disponibles (implementar en servicio)
         return ResponseEntity.ok(reservationService.findAvailableRooms(startDate, endDate, type));
     }
 }

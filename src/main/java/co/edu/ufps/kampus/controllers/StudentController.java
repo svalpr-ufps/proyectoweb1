@@ -29,21 +29,21 @@ public class StudentController {
         return ResponseEntity.ok(studentService.findByStatus(status));
     }
 
-    @PostMapping
+    // Opción 1: Usar rutas específicas
+    @PostMapping("/create")
     public ResponseEntity<Student> createStudent(@RequestBody Student student) {
         Student savedStudent = studentService.createStudent(student);
         return ResponseEntity.status(HttpStatus.CREATED).body(savedStudent);
     }
 
-    // Puedes agregar endpoints específicos para estudiantes aquí
-    
-    // Endpoint para registrar estudiante
-    @PostMapping
+    // Endpoint principal de registro
+    @PostMapping("/register")
     public ResponseEntity<StudentResponseDTO> registerStudent(@RequestBody StudentRequestDTO request) {
         StudentResponseDTO response = studentService.registerStudent(request);
-        return ResponseEntity.ok(response);
+        return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
-    // Endpoint para actualizar datos personales de un estudiante
+
+    // Endpoint para actualizar datos
     @PutMapping("/{studentCode}")
     public ResponseEntity<StudentResponseDTO> updateStudent(
             @PathVariable String studentCode,

@@ -16,8 +16,10 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 public class AuthenticationService {
     private final AuthenticationManager authenticationManager;
+    @SuppressWarnings("unused")
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
+    @SuppressWarnings("unused")
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
 

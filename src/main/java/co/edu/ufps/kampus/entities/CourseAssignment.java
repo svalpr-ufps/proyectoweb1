@@ -1,15 +1,21 @@
 package co.edu.ufps.kampus.entities;
+
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.UUID;
 
-@Getter @Setter
+import org.hibernate.annotations.GenericGenerator;
+
+@Getter
+@Setter
 @Entity
 public class CourseAssignment {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(generator = "UUID")
+    @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
+    @Column(name = "id", updatable = false, nullable = false)
     private UUID id;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -19,7 +25,5 @@ public class CourseAssignment {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "teacher_id", nullable = false)
     private Teacher teacher;
-
-
 
 }

@@ -1,36 +1,42 @@
 package co.edu.ufps.kampus.controllers;
 
+import co.edu.ufps.kampus.services.ReportService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.UUID;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.http.MediaType;
-import co.edu.ufps.kampus.services.ReportService;
-import org.springframework.http.HttpHeaders;
 
 @RestController
 @RequestMapping("/api/reports")
 public class ReportController {
 
+    private final ReportService reportService;
+
     @Autowired
-    private ReportService reportService;
+    public ReportController(ReportService reportService) {
+        this.reportService = reportService;
+    }
 
-    @GetMapping(value = "/performance", produces = MediaType.APPLICATION_PDF_VALUE)
+    @GetMapping("/performance/{studentId}")
     public ResponseEntity<byte[]> generatePerformanceReport(
-        @RequestParam UUID studentId,
-        @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
-        @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate
-    ) throws IOException {
-        byte[] pdfBytes = reportService.generatePerformanceReport(studentId, startDate, endDate);
-
-        return ResponseEntity.ok()
-            .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=reporte_rendimiento.pdf")
-            .body(pdfBytes);
+            @PathVariable UUID studentId,
+            @RequestParam LocalDate startDate,
+            @RequestParam LocalDate endDate
+    ) {
+        try {
+            byte[] reportBytes = reportService.generatePerformanceReport(studentId, startDate, endDate);
+            
+            return ResponseEntity.ok()
+                    .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=reporte-rendimiento.pdf")
+                    .contentType(MediaType.APPLICATION_PDF)
+                    .body(reportBytes);
+        } catch (IOException e) {
+            return ResponseEntity.internalServerError().build();
+        }
     }
 }

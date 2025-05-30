@@ -1,13 +1,10 @@
 package co.edu.ufps.kampus.entities;
-import co.edu.ufps.kampus.entities.Subject;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
-import java.util.UUID;
 
 @Entity
 @Table(name = "teachers")

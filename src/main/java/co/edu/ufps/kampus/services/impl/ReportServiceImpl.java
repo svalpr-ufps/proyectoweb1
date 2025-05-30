@@ -1,72 +1,91 @@
 package co.edu.ufps.kampus.services.impl;
 
+import co.edu.ufps.kampus.entities.Grade;
+import co.edu.ufps.kampus.repositories.GradeRepository;
+import co.edu.ufps.kampus.services.ReportService;
+import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.pdmodel.PDPage;
+import org.apache.pdfbox.pdmodel.PDPageContentStream;
+import org.apache.pdfbox.pdmodel.font.PDType1Font;
+import org.apache.pdfbox.pdmodel.font.Standard14Fonts;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
 
-import org.apache.pdfbox.pdmodel.PDDocument;
-import org.apache.pdfbox.pdmodel.PDPage;
-import org.apache.pdfbox.pdmodel.PDPageContentStream;
-import org.apache.pdfbox.pdmodel.font.PDType1Font;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import co.edu.ufps.kampus.entities.Grade;
-import co.edu.ufps.kampus.repositories.GradeRepository;
-import co.edu.ufps.kampus.services.ReportService;
-
 @Service
 public class ReportServiceImpl implements ReportService {
 
+    private final GradeRepository gradeRepository;
+
     @Autowired
-    private GradeRepository gradeRepository;
+    public ReportServiceImpl(GradeRepository gradeRepository) {
+        this.gradeRepository = gradeRepository;
+    }
 
     @Override
     public byte[] generatePerformanceReport(UUID studentId, LocalDate startDate, LocalDate endDate) throws IOException {
-        // 1. Obtener datos del estudiante y sus calificaciones
-        List<Grade> grades = (gradeRepository).findByAcademicRecord_Student_IdAndEvaluation_DateBetween(
+        List<Grade> grades = gradeRepository.findByAcademicRecord_Student_IdAndEvaluation_DateBetween(
             studentId, startDate, endDate
         );
 
-        // 2. Crear documento PDF
         try (PDDocument document = new PDDocument()) {
             PDPage page = new PDPage();
             document.addPage(page);
 
             try (PDPageContentStream contentStream = new PDPageContentStream(document, page)) {
-                // 3. Cabecera del reporte
-                contentStream.setFont(PDType1Font.HELVETICA_BOLD, 16);
+                // Configuración de fuentes
+                PDType1Font headerFont = new PDType1Font(Standard14Fonts.FontName.HELVETICA_BOLD);
+                PDType1Font bodyFont = new PDType1Font(Standard14Fonts.FontName.HELVETICA);
+                
+                // Cabecera
+                contentStream.setFont(headerFont, 16);
                 contentStream.beginText();
                 contentStream.newLineAtOffset(100, 700);
                 contentStream.showText("Reporte de Rendimiento Académico");
                 contentStream.endText();
 
-                // 4. Detalles del estudiante
-                contentStream.setFont(PDType1Font.HELVETICA, 12);
+                // Información del estudiante
+                contentStream.setFont(bodyFont, 12);
                 contentStream.beginText();
                 contentStream.newLineAtOffset(100, 650);
-                contentStream.showText("Estudiante: " + grades.get(0).getAcademicRecord().getStudent().getFullName());
+                
+                String studentName = grades.isEmpty() ? "N/A" : 
+                    grades.get(0).getAcademicRecord().getStudent().getFullName();
+                    
+                contentStream.showText("Estudiante: " + studentName);
                 contentStream.newLineAtOffset(0, -20);
                 contentStream.showText("Período: " + startDate + " a " + endDate);
                 contentStream.endText();
 
-                // 5. Tabla de calificaciones
+                // Tabla de calificaciones
                 int yPosition = 600;
                 for (Grade grade : grades) {
                     contentStream.beginText();
                     contentStream.newLineAtOffset(100, yPosition);
+                    
+                    String subjectName = grade.getEvaluation() == null || 
+                                        grade.getEvaluation().getSubject() == null ? 
+                                        "N/A" : grade.getEvaluation().getSubject().getName();
+                    
+                    Double score = grade.getScore() != null ? grade.getScore() : 0.0;
+                    
                     contentStream.showText(
-                        grade.getEvaluation().getSubject().getName() + ": " + grade.getScore() + 
-                        " (" + (grade.getScore() >= 3.0 ? "Aprobado" : "Reprobado") + ")"
+                        String.format("%s: %.2f (%s)", 
+                            subjectName, 
+                            score,
+                            score >= 3.0 ? "Aprobado" : "Reprobado")
                     );
                     contentStream.endText();
                     yPosition -= 20;
                 }
             }
 
-            // 6. Guardar PDF en byte[]
+            // Convertir a byte array
             ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
             document.save(byteArrayOutputStream);
             return byteArrayOutputStream.toByteArray();

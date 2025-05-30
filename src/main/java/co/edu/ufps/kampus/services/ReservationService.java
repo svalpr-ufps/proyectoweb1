@@ -84,7 +84,7 @@ public class ReservationService {
     }
 
     public Object findAvailableRooms(LocalDateTime startDate, LocalDateTime endDate, RoomType type) {
-        // TODO Auto-generated method stub
+        
         throw new UnsupportedOperationException("Unimplemented method 'findAvailableRooms'");
     }
 }

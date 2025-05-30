@@ -1,10 +1,9 @@
-package co.edu.ufps.kampus.controller;
+package co.edu.ufps.kampus.config;
 
 import co.edu.ufps.kampus.dtos.request.LoginRequestDTO;
 import co.edu.ufps.kampus.dtos.response.AuthResponseDTO;
 import co.edu.ufps.kampus.entities.User;
 import co.edu.ufps.kampus.repositories.UserRepository;
-import co.edu.ufps.kampus.config.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -18,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/public/auth")
 @CrossOrigin
-public class AuthController {
+public class JwtAuthController {
 
     @Autowired
     private AuthenticationManager authenticationManager;
@@ -29,6 +28,7 @@ public class AuthController {
     @Autowired
     private UserRepository userRepository;
 
+    @SuppressWarnings("unused")
     @Autowired
     private PasswordEncoder passwordEncoder;
 
