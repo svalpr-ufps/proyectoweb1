@@ -27,17 +27,51 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-                .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/public/**").permitAll()
-                        .requestMatchers("/api/student/**").hasRole("STUDENT")
-                        .requestMatchers("/api/teacher/**").hasRole("TEACHER")
-                        .requestMatchers("/api/admin/**").hasRole("ADMIN")
-                        .anyRequest().authenticated()
-                )
-                .csrf(csrf -> csrf.disable());
+            .authorizeHttpRequests(auth -> auth
+                // Permite acceso público a recursos estáticos y rutas esenciales
+                .requestMatchers(
+                    "/",
+                    "/index.html", 
+                    "/home", 
+                    "/login", 
+                    "/logout", 
+                    "/register", 
+                    "/error",
+                    "/css/**", 
+                    "/js/**", 
+                    "/images/**", 
+                    "/webjars/**",
+                    "/favicon.ico",
+                    "/api/public/**"
+                ).permitAll()
+                
+                // Rutas específicas para roles
+                .requestMatchers("/api/student/**").hasRole("STUDENT")
+                .requestMatchers("/api/teacher/**").hasRole("TEACHER")
+                .requestMatchers("/api/admin/**").hasRole("ADMIN")
+                
+                // Todas las demás rutas requieren autenticación
+                .anyRequest().authenticated()
+            )
+            .formLogin(form -> form
+                .loginPage("/login") // Página personalizada de login
+                .loginProcessingUrl("/perform_login")
+                .defaultSuccessUrl("/dashboard", true)
+                .failureUrl("/login?error=true")
+                .permitAll()
+            )
+            .logout(logout -> logout
+                .logoutUrl("/perform_logout")
+                .logoutSuccessUrl("/login?logout=true")
+                .deleteCookies("JSESSIONID")
+                .invalidateHttpSession(true)
+                .permitAll()
+            )
+            .csrf(csrf -> csrf.disable()); // Deshabilitar CSRF para desarrollo
 
         return http.build();
     }
+
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
@@ -55,6 +89,4 @@ public class SecurityConfig {
         provider.setPasswordEncoder(passwordEncoder());
         return provider;
     }
-
-
 }
