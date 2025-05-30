@@ -3,23 +3,28 @@ Proyecto Sistema Académico - Kampus
 
 ## Giovanny Antonio Muñoz Méndez - 1152276
 
-- **Tareas asignada:**
-- Mensajería interna básica (estudiante-docente)
-      - - **Porcentaje de completación:** 80%
-  - Registro manual de calificaciones
-      - **Porcentaje de completación:** 80%
-- Matrícula e inscripción a cursos
-      - - **Porcentaje de completación:** 80%
-  - Asignación de cursos a docentes
--- **Porcentaje de completación:** 80%
-  - Reserva aulas y laboratorios
-    -- **Porcentaje de completación:** 80%
-- Generación de reportes de rendimiento (PDF)
-      -- **Porcentaje de completación:** 80%
-- Programación de horarios (sin solapamientos)
-      -- **Porcentaje de completación:** 80%
+### Tareas asignadas:
 
----
+- **Mensajería interna básica (estudiante-docente)**  
+  - **Porcentaje de completación:** 80%
+
+- **Registro manual de calificaciones**  
+  - **Porcentaje de completación:** 80%
+
+- **Matrícula e inscripción a cursos**  
+  - **Porcentaje de completación:** 80%
+
+- **Asignación de cursos a docentes**  
+  - **Porcentaje de completación:** 80%
+
+- **Reserva de aulas y laboratorios**  
+  - **Porcentaje de completación:** 80%
+
+- **Generación de reportes de rendimiento (PDF)**  
+  - **Porcentaje de completación:** 80%
+
+- **Programación de horarios (sin solapamientos)**  
+  - **Porcentaje de completación:** 80%
 
 ---
 
