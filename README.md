@@ -5,16 +5,18 @@ Proyecto Sistema Académico - Kampus
 
 - **Tareas asignada:**
 - Mensajería interna básica (estudiante-docente)
-      - - **Porcentaje de completación:** 70%
+      - - **Porcentaje de completación:** 80%
   - Registro manual de calificaciones
-      - **Porcentaje de completación:** 70%
+      - **Porcentaje de completación:** 80%
 - Matrícula e inscripción a cursos
-      - - **Porcentaje de completación:** 60%
+      - - **Porcentaje de completación:** 80%
   - Asignación de cursos a docentes
-      - **Porcentaje de completación:** 60%
+      - **Porcentaje de completación:** 80%
   - Reserva aulas y laboratorios
       - - **Porcentaje de completación:** 80%
 - Generación de reportes de rendimiento (PDF)
+      - **Porcentaje de completación:** 80%
+- Programación de horarios (sin solapamientos)
       - **Porcentaje de completación:** 80%
 
 ---
