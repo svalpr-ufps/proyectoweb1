@@ -15,5 +15,5 @@ public interface UserService {
     User update(UUID id, User userDetails);
 
     void delete(UUID id);
-    // ... otros métodos
+    
 }
